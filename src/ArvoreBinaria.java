@@ -144,7 +144,11 @@ public class ArvoreBinaria {
     }
 
     private No removerNoUmFilho(No no) {
-        return (no.getEsquerda() != null) ? no.getEsquerda() : no.getDireita();
+        if (no.getEsquerda() != null) {
+            return no.getEsquerda();
+        } else {
+            return no.getDireita();
+        }
     }
 
     private No removerNoDoisFilhos(No no) {
