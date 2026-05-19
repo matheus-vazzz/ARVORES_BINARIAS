@@ -118,5 +118,50 @@ public class ArvoreBinaria {
         }
     }
 
+    public void remover(Integer valor) {
+        if (estaVazia()) return;    
+        this.raiz = removerRecursivo(this.raiz, valor);
+        if (this.raiz == null) this.raiz = new No(null);
+    }
+
+    private No removerRecursivo(No atual, Integer valor) {
+        if (atual == null || atual.getConteudo() == null) return null;
+
+        if (valor < atual.getConteudo()) {
+            atual.setEsquerda(removerRecursivo(atual.getEsquerda(), valor));
+        } else if (valor > atual.getConteudo()) {
+            atual.setDireita(removerRecursivo(atual.getDireita(), valor));
+        } else {
+            if (atual.getEsquerda() == null && atual.getDireita() == null) return removerNoFolha(atual);
+            if (atual.getEsquerda() == null || atual.getDireita() == null) return removerNoUmFilho(atual);
+            
+            return removerNoDoisFilhos(atual); 
+        }
+        return atual;
+    }
+
+    private No removerNoFolha(No no) {
+        return null;
+    }
+
+    private No removerNoUmFilho(No no) {
+        return (no.getEsquerda() != null) ? no.getEsquerda() : no.getDireita();
+    }
+
+    private No removerNoDoisFilhos(No no) {
+        No sucessor = buscarSucessor(no.getDireita());
+        no.setConteudo(sucessor.getConteudo());
+        no.setDireita(removerRecursivo(no.getDireita(), sucessor.getConteudo())); 
+        return no;
+    }
+
+    private No buscarSucessor(No no) {
+        No atual = no;
+        while (atual.getEsquerda() != null) {
+            atual = atual.getEsquerda();
+        }
+        return atual;
+    }
+
 
 }
