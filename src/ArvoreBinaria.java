@@ -134,7 +134,6 @@ public class ArvoreBinaria {
         } else {
             if (atual.getEsquerda() == null && atual.getDireita() == null) return removerNoFolha(atual);
             if (atual.getEsquerda() == null || atual.getDireita() == null) return removerNoUmFilho(atual);
-            
             return removerNoDoisFilhos(atual); 
         }
         return atual;
@@ -162,6 +161,4 @@ public class ArvoreBinaria {
         }
         return atual;
     }
-
-
 }
