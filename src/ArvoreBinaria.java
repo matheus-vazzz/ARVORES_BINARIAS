@@ -148,13 +148,13 @@ public class ArvoreBinaria {
     }
 
     private No removerNoDoisFilhos(No no) {
-        No sucessor = buscarSucessor(no.getDireita());
+        No sucessor = procurarSucessor(no.getDireita());
         no.setConteudo(sucessor.getConteudo());
         no.setDireita(removerRecursivo(no.getDireita(), sucessor.getConteudo())); 
         return no;
     }
 
-    private No buscarSucessor(No no) {
+    private No procurarSucessor(No no) {
         No atual = no;
         while (atual.getEsquerda() != null) {
             atual = atual.getEsquerda();
